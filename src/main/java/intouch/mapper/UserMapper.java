@@ -1,8 +1,8 @@
-package ru.itis.intouch.mapper;
+package intouch.mapper;
 
-import ru.itis.intouch.dto.SignUpForm;
-import ru.itis.intouch.dto.UserDto;
-import ru.itis.intouch.model.User;
+import intouch.dto.SignUpForm;
+import intouch.dto.UserDto;
+import intouch.model.User;
 
 public interface UserMapper {
     UserDto toDto(User user);

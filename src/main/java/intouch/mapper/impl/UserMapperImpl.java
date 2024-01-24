@@ -1,11 +1,11 @@
-package ru.itis.intouch.mapper.impl;
+package intouch.mapper.impl;
 
 import lombok.RequiredArgsConstructor;
-import ru.itis.intouch.dto.SignUpForm;
-import ru.itis.intouch.dto.UserDto;
-import ru.itis.intouch.mapper.UserMapper;
-import ru.itis.intouch.model.User;
-import ru.itis.intouch.services.PasswordEncoder;
+import intouch.dto.SignUpForm;
+import intouch.dto.UserDto;
+import intouch.mapper.UserMapper;
+import intouch.model.User;
+import intouch.services.PasswordEncoder;
 
 import java.util.UUID;
 

@@ -1,14 +1,14 @@
-package ru.itis.intouch.listeners;
+package intouch.listeners;
 
-import ru.itis.intouch.mapper.UserMapper;
-import ru.itis.intouch.mapper.impl.UserMapperImpl;
-import ru.itis.intouch.repository.UsersRepository;
-import ru.itis.intouch.repository.impl.UsersRepositoryImpl;
-import ru.itis.intouch.services.AuthorizationService;
-import ru.itis.intouch.services.PasswordEncoder;
-import ru.itis.intouch.services.impl.AuthorizationServiceImpl;
-import ru.itis.intouch.services.impl.PasswordEncoderImpl;
-import ru.itis.intouch.services.impl.SessionsManager;
+import intouch.mapper.UserMapper;
+import intouch.mapper.impl.UserMapperImpl;
+import intouch.repository.UsersRepository;
+import intouch.repository.impl.UsersRepositoryImpl;
+import intouch.services.AuthorizationService;
+import intouch.services.PasswordEncoder;
+import intouch.services.impl.AuthorizationServiceImpl;
+import intouch.services.impl.PasswordEncoderImpl;
+import intouch.services.impl.SessionsManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

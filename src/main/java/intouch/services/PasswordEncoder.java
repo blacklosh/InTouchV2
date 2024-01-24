@@ -1,4 +1,4 @@
-package ru.itis.intouch.services;
+package intouch.services;
 
 public interface PasswordEncoder {
     boolean matches(String password, String hashPassword);

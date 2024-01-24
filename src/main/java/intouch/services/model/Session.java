@@ -1,4 +1,4 @@
-package ru.itis.intouch.services.model;
+package intouch.services.model;
 
 import java.util.HashMap;
 import java.util.Map;

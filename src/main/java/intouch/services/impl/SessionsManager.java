@@ -1,6 +1,6 @@
-package ru.itis.intouch.services.impl;
+package intouch.services.impl;
 
-import ru.itis.intouch.services.model.Session;
+import intouch.services.model.Session;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

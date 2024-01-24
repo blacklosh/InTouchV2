@@ -1,4 +1,4 @@
-package ru.itis.intouch.servlets;
+package intouch.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

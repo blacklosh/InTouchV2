@@ -1,9 +1,9 @@
-package ru.itis.intouch.services;
+package intouch.services;
 
-import ru.itis.intouch.dto.SignInForm;
-import ru.itis.intouch.dto.SignUpForm;
-import ru.itis.intouch.dto.UserDto;
-import ru.itis.intouch.exceptions.InTouchException;
+import intouch.dto.SignInForm;
+import intouch.dto.SignUpForm;
+import intouch.dto.UserDto;
+import intouch.exceptions.InTouchException;
 
 public interface AuthorizationService {
     UserDto signUp(SignUpForm form) throws InTouchException;

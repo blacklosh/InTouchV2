@@ -1,4 +1,4 @@
-package ru.itis.intouch.services;
+package intouch.services;
 
 import java.util.UUID;
 

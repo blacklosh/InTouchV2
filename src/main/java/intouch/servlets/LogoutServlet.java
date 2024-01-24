@@ -1,7 +1,7 @@
-package ru.itis.intouch.servlets;
+package intouch.servlets;
 
-import ru.itis.intouch.services.impl.SessionsManager;
-import ru.itis.intouch.services.model.Session;
+import intouch.services.impl.SessionsManager;
+import intouch.services.model.Session;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;

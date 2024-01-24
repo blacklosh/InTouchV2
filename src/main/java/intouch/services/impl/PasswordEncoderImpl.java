@@ -1,6 +1,6 @@
-package ru.itis.intouch.services.impl;
+package intouch.services.impl;
 
-import ru.itis.intouch.services.PasswordEncoder;
+import intouch.services.PasswordEncoder;
 
 public class PasswordEncoderImpl implements PasswordEncoder {
     @Override

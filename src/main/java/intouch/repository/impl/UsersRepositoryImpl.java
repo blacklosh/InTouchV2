@@ -1,8 +1,8 @@
-package ru.itis.intouch.repository.impl;
+package intouch.repository.impl;
 
 import lombok.RequiredArgsConstructor;
-import ru.itis.intouch.model.User;
-import ru.itis.intouch.repository.UsersRepository;
+import intouch.model.User;
+import intouch.repository.UsersRepository;
 
 import java.sql.*;
 import java.util.List;

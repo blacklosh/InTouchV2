@@ -1,4 +1,4 @@
-package ru.itis.intouch.model;
+package intouch.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

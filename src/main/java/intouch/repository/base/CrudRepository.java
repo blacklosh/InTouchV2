@@ -1,4 +1,4 @@
-package ru.itis.intouch.repository.base;
+package intouch.repository.base;
 
 import java.util.List;
 import java.util.Optional;

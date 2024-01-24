@@ -1,4 +1,4 @@
-package ru.itis.intouch.dto;
+package intouch.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

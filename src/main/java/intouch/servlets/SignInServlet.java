@@ -1,11 +1,11 @@
-package ru.itis.intouch.servlets;
+package intouch.servlets;
 
-import ru.itis.intouch.dto.SignInForm;
-import ru.itis.intouch.dto.UserDto;
-import ru.itis.intouch.exceptions.InTouchException;
-import ru.itis.intouch.services.AuthorizationService;
-import ru.itis.intouch.services.model.Session;
-import ru.itis.intouch.services.impl.SessionsManager;
+import intouch.dto.SignInForm;
+import intouch.dto.UserDto;
+import intouch.exceptions.InTouchException;
+import intouch.services.AuthorizationService;
+import intouch.services.model.Session;
+import intouch.services.impl.SessionsManager;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;

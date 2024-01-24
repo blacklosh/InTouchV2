@@ -1,7 +1,7 @@
-package ru.itis.intouch.repository;
+package intouch.repository;
 
-import ru.itis.intouch.model.User;
-import ru.itis.intouch.repository.base.CrudRepository;
+import intouch.model.User;
+import intouch.repository.base.CrudRepository;
 
 import java.util.Optional;
 import java.util.UUID;

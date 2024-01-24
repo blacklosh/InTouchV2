@@ -1,15 +1,15 @@
-package ru.itis.intouch.services.impl;
+package intouch.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import ru.itis.intouch.dto.SignInForm;
-import ru.itis.intouch.dto.SignUpForm;
-import ru.itis.intouch.dto.UserDto;
-import ru.itis.intouch.exceptions.InTouchException;
-import ru.itis.intouch.mapper.UserMapper;
-import ru.itis.intouch.model.User;
-import ru.itis.intouch.repository.UsersRepository;
-import ru.itis.intouch.services.AuthorizationService;
-import ru.itis.intouch.services.PasswordEncoder;
+import intouch.dto.SignInForm;
+import intouch.dto.SignUpForm;
+import intouch.dto.UserDto;
+import intouch.exceptions.InTouchException;
+import intouch.mapper.UserMapper;
+import intouch.model.User;
+import intouch.repository.UsersRepository;
+import intouch.services.AuthorizationService;
+import intouch.services.PasswordEncoder;
 
 import java.util.Optional;
 
