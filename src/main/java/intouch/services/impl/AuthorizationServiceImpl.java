@@ -21,7 +21,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public UserDto signUp(SignUpForm form) throws InTouchException {
-        if (form.getEmail() == null) {
+        if (form.getEmail() == null || form.getEmail().isEmpty()) {
             throw new InTouchException("Email cannot be null");
         }
         Optional<User> optionalUser = usersRepository.findByEmail(form.getEmail());
