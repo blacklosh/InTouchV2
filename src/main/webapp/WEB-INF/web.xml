@@ -30,12 +30,12 @@
         <servlet-name>freemarker</servlet-name>
         <url-pattern>*.ftl</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>signInServlet</servlet-name>
         <servlet-class>intouch.servlets.SignInServlet</servlet-class>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>signInServlet</servlet-name>
         <url-pattern>/signin</url-pattern>
