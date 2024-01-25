@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(value = "/signin", loadOnStartup = 1)
+//@WebServlet(value = "/signin", loadOnStartup = 1)
 public class SignInServlet extends HttpServlet {
     private AuthorizationService authorizationService;
     private SessionsManager sessionsManager;
