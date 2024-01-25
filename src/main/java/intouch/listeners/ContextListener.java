@@ -9,6 +9,8 @@ import intouch.services.PasswordEncoder;
 import intouch.services.impl.AuthorizationServiceImpl;
 import intouch.services.impl.PasswordEncoderImpl;
 import intouch.services.impl.SessionsManager;
+import intouch.util.PropertyReader;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -18,16 +20,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Slf4j
 @WebListener
 public class ContextListener implements ServletContextListener {
-
-    //TODO вынести эти поля в параметры application.properties
-    private static final String DB_USERNAME = "postgres";
-    private static final String DB_PASSWORD = "qwerty";
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/intouchdb";
+    private static String DB_USERNAME;
+    private static String DB_PASSWORD;
+    private static String DB_URL;
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        ServletContext context = servletContextEvent.getServletContext();
+        DB_USERNAME = PropertyReader.getProperty("DB_USERNAME",context);
+        DB_PASSWORD = PropertyReader.getProperty("DB_PASSWORD",context);
+        DB_URL = PropertyReader.getProperty("DB_URL",context);
+        System.out.println("DB_USERNAME: " + DB_USERNAME);
+        System.out.println("Начинаю инициализировать контекст");
         Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -41,7 +48,6 @@ public class ContextListener implements ServletContextListener {
             System.err.println("CONNECTION NOT CREATED: " + e.getLocalizedMessage());
         }
 
-        ServletContext context = servletContextEvent.getServletContext();
 
         SessionsManager sessionsManager = new SessionsManager();
         UsersRepository usersRepository = new UsersRepositoryImpl(connection);
@@ -51,6 +57,7 @@ public class ContextListener implements ServletContextListener {
 
         context.setAttribute("sessionsManager", sessionsManager);
         context.setAttribute("authorizationService", authorizationService);
+        System.out.println("Успешно инициализировал контекст");
     }
 
     @Override
