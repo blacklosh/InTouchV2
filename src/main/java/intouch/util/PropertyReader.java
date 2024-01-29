@@ -1,15 +1,20 @@
 package intouch.util;
 
 import javax.servlet.ServletContext;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.URI;
+import java.net.URL;
 
 public class PropertyReader {
-    public static String getProperty(String prop,ServletContext servletContext) {
+    public static String getProperty(String prop, ServletContext servletContext) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(servletContext.getResourceAsStream("/resources/application.properties")));
+            URL url = PropertyReader.class.getResource("/application.properties");
+            if (url == null) {
+                System.err.println("PROPERTIES FILE NOT FOUND");
+                return null;
+            }
+            String path = url.getFile();
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             while (bufferedReader.ready()) {
                 String read = bufferedReader.readLine();
                 if(read.startsWith(prop)) {
@@ -17,6 +22,7 @@ public class PropertyReader {
                 }
             }
         } catch (IOException e) {
+            System.err.println(e.getLocalizedMessage());
             throw new RuntimeException(e);
         }
         return null;

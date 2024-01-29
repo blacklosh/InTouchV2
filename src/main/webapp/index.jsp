@@ -1,12 +1,15 @@
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Main</title>
+  <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+  <title>InTouch</title>
+  <link rel="stylesheet" href="resources/css/index.css">
 </head>
 <body>
 <h1>InTouch</h1>
-<a href="signin">Sign In</a>
-<a href="signup">Sign Up</a>
-<p style="color:darkblue; font-size: 100px">Made by Arturchik</p>
+<a href="signup.ftl">Регистрация</a><br/>
+<a href="signin.ftl">Вход</a><br/>
+<a href="infproj.ftl">Информация о проекте</a>
+<a href="infdev.ftl">Информация о разработчиках</a>
+
 </body>
 </html>

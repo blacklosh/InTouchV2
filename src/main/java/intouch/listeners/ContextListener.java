@@ -48,7 +48,6 @@ public class ContextListener implements ServletContextListener {
             System.err.println("CONNECTION NOT CREATED: " + e.getLocalizedMessage());
         }
 
-
         SessionsManager sessionsManager = new SessionsManager();
         UsersRepository usersRepository = new UsersRepositoryImpl(connection);
         PasswordEncoder passwordEncoder = new PasswordEncoderImpl();

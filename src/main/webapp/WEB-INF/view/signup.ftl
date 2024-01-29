@@ -10,11 +10,14 @@
         ${err!''}
     </div>
     <form method="post" action="signup">
-        <input name="name" type="text" placeholder="Name">
-        <input name="email" type="email" placeholder="Email">
-        <input name="password" type="password" placeholder="Password">
-        <input type="submit" value="knopka">
-
+        <fieldset>
+            <legend>Регистрация</legend>
+            <input name="name" type="text" placeholder="Имя" required> <br />
+            <input name="email" type="email" placeholder="Email" required><br />
+            <input name="password" type="password" placeholder="Пароль" required><br />
+            <input type="submit" value="Зарегистрироваться">
+        </fieldset>
+        <a href="signin.ftl">Вход</a>
     </form>
     </body>
 </http>

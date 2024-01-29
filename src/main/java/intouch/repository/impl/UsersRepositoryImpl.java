@@ -15,7 +15,7 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     private static final String SQL_SELECT_BY_EMAIL = "select * from user_accounts where email = ?";
     private static final String SQL_SELECT_BY_ID = "select * from user_accounts where id = ?";
-    private static final String SQL_REGISTER = "insert into user_accounts(name, email, passwordHash, id) values(?, ?, ?, uuid_generate_v1())";
+    private static final String SQL_REGISTER = "insert into user_accounts(name, email, password_hash, id) values(?, ?, ?, uuid_generate_v1())";
     private static final String SQL_DELETED = "delete from user_accounts where id = ?";
 
     @Override
@@ -31,7 +31,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                     .id(resultSet.getObject("id", UUID.class))
                     .name(resultSet.getString("name"))
                     .email(resultSet.getString("email"))
-                    .passwordHash(resultSet.getString("passwordHash"))
+                    .passwordHash(resultSet.getString("password_hash"))
                     .build();
             return Optional.of(user);
         } catch (SQLException throwable) {
@@ -80,7 +80,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                     .id(resultSet.getObject("id", UUID.class))
                     .name(resultSet.getString("name"))
                     .email(resultSet.getString("email"))
-                    .passwordHash(resultSet.getString("passwordHash"))
+                    .passwordHash(resultSet.getString("password_hash"))
                     .build();
             return Optional.of(user);
         } catch (SQLException throwable) {

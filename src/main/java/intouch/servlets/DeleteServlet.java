@@ -1,5 +1,7 @@
 package intouch.servlets;
 
+import intouch.model.User;
+import intouch.repository.impl.UsersRepositoryImpl;
 import intouch.services.impl.SessionsManager;
 import intouch.services.model.Session;
 
@@ -12,10 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.UUID;
 
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
     private SessionsManager sessionsManager;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         ServletContext context = config.getServletContext();
@@ -23,7 +28,10 @@ public class DeleteServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = sessionsManager.getSession(false,req,resp);
+        Session session = sessionsManager.getSession(false, req, resp);
+        if (session == null) {
+            resp.sendRedirect("signin");
+        }
 
     }
 }

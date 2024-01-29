@@ -1,6 +1,19 @@
 div {
     color: darkslategray;
 }
-input{
-    color: blueviolet;
+input {
+    margin-bottom: 1%;
+    height: 25px;
+    font-size: 18px;
+}
+form {
+    padding: 200px;
+    text-align: center
+}
+legend {
+    display: compact;
+    font-size: 40px;
+}
+a {
+    font-size: 40px;
 }
