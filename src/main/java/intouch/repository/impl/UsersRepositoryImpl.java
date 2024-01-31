@@ -44,11 +44,17 @@ public class UsersRepositoryImpl implements UsersRepository {
     public User save(User item) {
         // TODO: Обновлять тоже должен уметь
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_REGISTER);
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    SQL_REGISTER,
+                    new String[]{"id"}
+            );
             preparedStatement.setString(1, item.getName());
             preparedStatement.setString(2, item.getEmail());
             preparedStatement.setString(3, item.getPasswordHash());
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            generatedKeys.next();
+            item.setId((UUID) generatedKeys.getObject(1));
             return item;
         } catch (SQLException e) {
             System.out.println("SQL Exception: " + e.getLocalizedMessage());

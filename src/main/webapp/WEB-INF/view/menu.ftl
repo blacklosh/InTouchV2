@@ -11,7 +11,7 @@
 <div class="sidenav">
     <a href="#contact">Новости</a>
     <a href="#clients">Сообщения</a>
-    <a href="profile.ftl">Профиль</a>
+    <a href="profile">Профиль</a>
     <a href="#services">Друзья</a>
 </div>
 </body>

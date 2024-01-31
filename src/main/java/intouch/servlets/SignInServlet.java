@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebServlet(value = "/signin", loadOnStartup = 1)
+@WebServlet(value = "/signin")
 public class SignInServlet extends HttpServlet {
     private AuthorizationService authorizationService;
     private SessionsManager sessionsManager;
@@ -33,7 +33,7 @@ public class SignInServlet extends HttpServlet {
         resp.setCharacterEncoding("utf-8");
         Session session = sessionsManager.getSession(false, req, resp);
         if (session != null && session.getAttribute("user") != null) {
-            resp.sendRedirect("menu.ftl");
+            resp.sendRedirect("menu");
         } else {
             req.setAttribute("err",req.getParameter("err"));
             req.getRequestDispatcher("signin.ftl").forward(req, resp);
@@ -53,7 +53,7 @@ public class SignInServlet extends HttpServlet {
             UserDto userDto = authorizationService.signIn(signInForm);
             Session session = sessionsManager.getSession(true, req, resp);
             session.setAttribute("user", userDto);
-            resp.sendRedirect("menu.ftl");
+            resp.sendRedirect("menu");
         } catch (InTouchException e) {
             resp.sendRedirect("signin?err=" + e.getMessage());
         }

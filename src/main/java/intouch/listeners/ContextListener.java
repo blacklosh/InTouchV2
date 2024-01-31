@@ -6,9 +6,11 @@ import intouch.repository.UsersRepository;
 import intouch.repository.impl.UsersRepositoryImpl;
 import intouch.services.AuthorizationService;
 import intouch.services.PasswordEncoder;
+import intouch.services.UsersService;
 import intouch.services.impl.AuthorizationServiceImpl;
 import intouch.services.impl.PasswordEncoderImpl;
 import intouch.services.impl.SessionsManager;
+import intouch.services.impl.UsersServiceImpl;
 import intouch.util.PropertyReader;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +21,7 @@ import javax.servlet.annotation.WebListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.UUID;
 
 @Slf4j
 @WebListener
@@ -52,10 +55,12 @@ public class ContextListener implements ServletContextListener {
         UsersRepository usersRepository = new UsersRepositoryImpl(connection);
         PasswordEncoder passwordEncoder = new PasswordEncoderImpl();
         UserMapper userMapper = new UserMapperImpl(passwordEncoder);
+        UsersService usersService = new UsersServiceImpl(usersRepository);
         AuthorizationService authorizationService = new AuthorizationServiceImpl(usersRepository, userMapper, passwordEncoder);
 
         context.setAttribute("sessionsManager", sessionsManager);
         context.setAttribute("authorizationService", authorizationService);
+        context.setAttribute("usersService", usersService);
         System.out.println("Успешно инициализировал контекст");
     }
 

@@ -30,7 +30,7 @@ public class MenuServlet extends HttpServlet {
         if (session != null && session.getAttribute("user") != null) {
             UserDto user = (UserDto) session.getAttribute("user");
             req.setAttribute("user", user);
-            req.getRequestDispatcher("menu").forward(req,resp);
+            req.getRequestDispatcher("menu.ftl").forward(req,resp);
         } else {
             resp.sendRedirect("signin");
         }

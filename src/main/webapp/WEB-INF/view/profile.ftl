@@ -11,7 +11,7 @@
 <body>
 
 <div class="sidenav">
-    <a href="profile">Редактировать</a>
+    <a href="edit.ftl">Редактировать</a>
     <a href="logout">Выход</a>
     <a href="delete">Удалить профиль</a>
 </div>
