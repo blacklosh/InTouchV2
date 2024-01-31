@@ -33,7 +33,7 @@ public class SignUpServlet extends HttpServlet {
         resp.setCharacterEncoding("utf-8");
         Session session = sessionsManager.getSession(false, req, resp);
         if (session != null && session.getAttribute("user") != null) {
-            resp.sendRedirect("profile");
+            resp.sendRedirect("menu");
         } else {
             req.setAttribute("err",req.getParameter("err"));
             req.getRequestDispatcher("signup.ftl").forward(req, resp);
@@ -55,7 +55,7 @@ public class SignUpServlet extends HttpServlet {
             UserDto userDto = authorizationService.signUp(signUpForm);
             Session session = sessionsManager.getSession(true, req, resp);
             session.setAttribute("user", userDto);
-            resp.sendRedirect("profile");
+            resp.sendRedirect("menu");
         } catch (InTouchException e) {
             resp.sendRedirect("signup?err=" + e.getMessage());
         }

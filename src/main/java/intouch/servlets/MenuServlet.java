@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/profile")
-public class ProfileServlet extends HttpServlet {
+@WebServlet("/menu")
+public class MenuServlet extends HttpServlet {
     private SessionsManager sessionsManager;
 
     @Override
@@ -30,7 +30,7 @@ public class ProfileServlet extends HttpServlet {
         if (session != null && session.getAttribute("user") != null) {
             UserDto user = (UserDto) session.getAttribute("user");
             req.setAttribute("user", user);
-            req.getRequestDispatcher("profile.ftl").forward(req,resp);
+            req.getRequestDispatcher("menu").forward(req,resp);
         } else {
             resp.sendRedirect("signin");
         }
