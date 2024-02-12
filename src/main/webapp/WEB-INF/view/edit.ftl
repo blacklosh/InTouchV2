@@ -1,39 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Редактирование профиля</title>
-    <link rel="stylesheet" href="edit.css">
-    <link rel="stylesheet" href="style_main.css">
+    <link rel="stylesheet" href="resources/css/style_main.css">
+    <link rel="stylesheet" href="resources/css/edit.css">
 </head>
 <body>
-<h1>Профиль</h1>
 <div class="sidenav">
-<a href="profile.ftl">Профиль</a>
-<a href="menu.ftl">Главная</a>
-    Ваш пол: <input type="radio" name="man"> Мужской <input type="radio" name="man" checked> Женский
-    <br>
-    Месяц и год рождения:
-    <br>
-    <select>
-        <option> Январь </option>
-    </select>
-    <select>
-        <option>1990</option>
-    </select>
-    <br>
-    Знакомые технологии:
-    <br>
-    <select size="4">
-        <option>HTML</option>
-        <option selected>CSS</option>
-        <option>JavaScript</option>
-        <option>Node.js</option>
-    </select>
-    <br>
-    Фото: <input type="file">
-    <br>
-    <input type="submit" value="Сохранить">
+    <a href="profile">Профиль</a>
+    <a href="menu">Главная</a>
+    <a href="personal_data">Личные данные</a>
+</div>
+<div class="main">
+    <h2>Информация</h2>
+    Ваш пол: <input type="radio" name="man"> Мужской </br><input type="radio" name="man"> Женский
+    <p>Hey, Misha</p>
+    <p>Letter, Misha</p>
 </div>
 </body>
 </html>

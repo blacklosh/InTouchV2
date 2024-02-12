@@ -29,6 +29,6 @@ public class EditServlet extends HttpServlet {
         Session session = sessionsManager.getSession(false, req, resp);
             UserDto user = (UserDto) session.getAttribute("user");
             req.setAttribute("user", user);
-            req.getRequestDispatcher("edit").forward(req,resp);
+            req.getRequestDispatcher("edit.ftl").forward(req,resp);
     }
 }
