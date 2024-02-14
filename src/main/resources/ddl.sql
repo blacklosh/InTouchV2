@@ -12,11 +12,17 @@ create table user_accounts
 
 create table posts
 (
-    id        uuid
-        constraint posts_pk
-            primary key,
-    author_id uuid
-        constraint posts_user_accounts_id_fk
+    id uuid constraint posts_pk primary key,
+    author_id uuid constraint posts_user_accounts_id_fk
             references user_accounts,
-    text      varchar(500) not null
+    text varchar(500) not null
+);
+
+create table message
+(
+    id uuid primary key ,
+    creation_date timestamp(6),
+    author_id uuid,
+    foreign key (author_id) references user_accounts(id),
+    text varchar(500)
 );

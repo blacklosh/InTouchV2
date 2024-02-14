@@ -1,16 +1,18 @@
 package intouch.listeners;
 
+import intouch.mapper.PostMapper;
 import intouch.mapper.UserMapper;
+import intouch.mapper.impl.PostMapperImpl;
 import intouch.mapper.impl.UserMapperImpl;
+import intouch.repository.PostsRepository;
 import intouch.repository.UsersRepository;
+import intouch.repository.impl.PostsRepositoryImpl;
 import intouch.repository.impl.UsersRepositoryImpl;
 import intouch.services.AuthorizationService;
 import intouch.services.PasswordEncoder;
+import intouch.services.PostsService;
 import intouch.services.UsersService;
-import intouch.services.impl.AuthorizationServiceImpl;
-import intouch.services.impl.PasswordEncoderImpl;
-import intouch.services.impl.SessionsManager;
-import intouch.services.impl.UsersServiceImpl;
+import intouch.services.impl.*;
 import intouch.util.PropertyReader;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,22 +23,20 @@ import javax.servlet.annotation.WebListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.UUID;
 
 @Slf4j
 @WebListener
 public class ContextListener implements ServletContextListener {
-    private static String DB_USERNAME;
     private static String DB_PASSWORD;
     private static String DB_URL;
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext context = servletContextEvent.getServletContext();
-        DB_USERNAME = PropertyReader.getProperty("DB_USERNAME",context);
+        String dbUsername = PropertyReader.getProperty("DB_USERNAME", context);
         DB_PASSWORD = PropertyReader.getProperty("DB_PASSWORD",context);
         DB_URL = PropertyReader.getProperty("DB_URL",context);
-        System.out.println("DB_USERNAME: " + DB_USERNAME);
+        System.out.println("DB_USERNAME: " + dbUsername);
         System.out.println("Начинаю инициализировать контекст");
         Connection connection = null;
         try {
@@ -46,7 +46,7 @@ public class ContextListener implements ServletContextListener {
             System.err.println("DRIVER NOT FOUND");
         }
         try {
-            connection = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
+            connection = DriverManager.getConnection(DB_URL, dbUsername,DB_PASSWORD);
         } catch (SQLException e) {
             System.err.println("CONNECTION NOT CREATED: " + e.getLocalizedMessage());
         }
@@ -57,10 +57,14 @@ public class ContextListener implements ServletContextListener {
         UserMapper userMapper = new UserMapperImpl(passwordEncoder);
         UsersService usersService = new UsersServiceImpl(usersRepository);
         AuthorizationService authorizationService = new AuthorizationServiceImpl(usersRepository, userMapper, passwordEncoder);
+        PostsRepository postsRepository = new PostsRepositoryImpl(connection);
+        PostMapper postMapper = new PostMapperImpl();
+        PostsService postsService = new PostsServiceImpl(postsRepository, postMapper);
 
         context.setAttribute("sessionsManager", sessionsManager);
         context.setAttribute("authorizationService", authorizationService);
         context.setAttribute("usersService", usersService);
+        context.setAttribute("postsService", postsService);
         System.out.println("Успешно инициализировал контекст");
     }
 

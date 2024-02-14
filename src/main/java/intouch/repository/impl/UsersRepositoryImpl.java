@@ -16,6 +16,7 @@ public class UsersRepositoryImpl implements UsersRepository {
     private static final String SQL_SELECT_BY_EMAIL = "select * from user_accounts where email = ?";
     private static final String SQL_SELECT_BY_ID = "select * from user_accounts where id = ?";
     private static final String SQL_REGISTER = "insert into user_accounts(name, email, password_hash, id) values(?, ?, ?, uuid_generate_v1())";
+    private static final String SQL_UPDATE = "update user_accounts set name=?, email=?, password_hash=? where id=?";
     private static final String SQL_DELETED = "delete from user_accounts where id = ?";
 
     @Override
@@ -42,20 +43,29 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     @Override
     public User save(User item) {
-        // TODO: Обновлять тоже должен уметь
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    SQL_REGISTER,
-                    new String[]{"id"}
-            );
-            preparedStatement.setString(1, item.getName());
-            preparedStatement.setString(2, item.getEmail());
-            preparedStatement.setString(3, item.getPasswordHash());
-            preparedStatement.executeUpdate();
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            generatedKeys.next();
-            item.setId((UUID) generatedKeys.getObject(1));
-            return item;
+            if(item.getId() == null) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        SQL_REGISTER,
+                        new String[]{"id"}
+                );
+                preparedStatement.setString(1, item.getName());
+                preparedStatement.setString(2, item.getEmail());
+                preparedStatement.setString(3, item.getPasswordHash());
+                preparedStatement.executeUpdate();
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                generatedKeys.next();
+                item.setId((UUID) generatedKeys.getObject(1));
+                return item;
+            } else {
+                PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE);
+                preparedStatement.setString(1, item.getName());
+                preparedStatement.setString(2, item.getEmail());
+                preparedStatement.setString(3, item.getPasswordHash());
+                preparedStatement.setObject(4, item.getId());
+                preparedStatement.executeUpdate();
+                return item;
+            }
         } catch (SQLException e) {
             System.out.println("SQL Exception: " + e.getLocalizedMessage());
         }

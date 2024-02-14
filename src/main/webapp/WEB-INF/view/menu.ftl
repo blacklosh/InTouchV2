@@ -9,8 +9,8 @@
 <body>
 
 <div class="sidenav">
-    <a href="#contact">Новости</a>
-    <a href="#clients">Сообщения</a>
+    <a href="posts">Новости</a>
+    <a href="message">Сообщения</a>
     <a href="profile">Профиль</a>
     <a href="#services">Друзья</a>
 </div>

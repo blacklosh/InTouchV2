@@ -9,6 +9,7 @@
 <body>
 
 <div class="sidenav">
+    <a href="menu">Главная</a>
     <a href="edit">Редактировать</a>
     <a href="logout">Выход</a>
     <a href="delete">Удалить профиль</a>
