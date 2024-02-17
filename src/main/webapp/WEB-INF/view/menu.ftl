@@ -14,5 +14,8 @@
     <a href="profile">Профиль</a>
     <a href="#services">Друзья</a>
 </div>
+<div class="content">
+
+</div>
 </body>
 </html>

@@ -22,13 +22,24 @@
     color: #f1f1f1;
 }
 
-.main {
-    margin-left: 150px;
-    font-size: 18px;
-
+.content {
+    padding-left: 200px;
+    padding-top: 20px;
+    padding-right: 40px;
+    padding-bottom: 40px;
 }
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+body {
+    width: 500px;
+    padding: 10px 20px;
+
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: "Arial", sans-serif;
+    color: black;
 }

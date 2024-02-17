@@ -5,30 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Новости</title>
     <link href="resources/css/style_main.css" rel="stylesheet">
+    <link href="resources/css/post.css" rel="stylesheet">
 </head>
 <body>
 
-<#--<div class="sidenav">-->
-<#--    <a href="menu">Главная</a>-->
-<#--    <a href="edit">Редактировать</a>-->
-<#--    <a href="logout">Выход</a>-->
-<#--    <a href="delete">Удалить профиль</a>-->
-<#--</div>-->
-
+<div class="sidenav">
+    <a href="menu">Главная</a>
+    <a href="edit">Редактировать</a>
+    <a href="logout">Выход</a>
+    <a href="delete">Удалить профиль</a>
+</div>
 <h1>${user.name}</h1>
-
-<form method="post">
-    <label>Текст поста:
-        <input type="text" name="text"/>
-    </label>
-    <input type="submit" value="Создать"/>
-</form>
-
-<#list posts as post>
-
-    <p>${post.text}</p>
-
-</#list>
-
+<div class="content">
+    <form method="post">
+        <label>
+            <textarea type="text" name="text" placeholder="Напишите сообщение..."></textarea>
+        </label>
+            <input type="submit" value="Отправить"/>
+    </form>
+    <#list posts as post>
+        <p>${user.name} ${post.text} ${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</p>
+    </#list>
+</div>
 </body>
 </html>

@@ -13,10 +13,11 @@
     <a href="menu">Главная</a>
     <a href="personal_data">Личные данные</a>
 </div>
-<div class="main">
+<div class="content">
     <h2>Информация</h2>
     Ваш пол: <input type="radio" name="man"> Мужской </br><input type="radio" name="man"> Женский
     <p>Hey, Misha</p>
+
     <p>Letter, Misha</p>
 </div>
 </body>

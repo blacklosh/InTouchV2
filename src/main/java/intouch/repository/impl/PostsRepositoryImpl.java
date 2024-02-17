@@ -5,10 +5,7 @@ import intouch.model.User;
 import intouch.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -17,8 +14,8 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     private static final String SQL_SELECT_BY_ID = "select * from posts where id = ?";
     private static final String SQL_SELECT_ALL = "select * from posts";
-    private static final String SQL_SAVE = "insert into posts(author_id, text, id) values(?, ?, uuid_generate_v1())";
-    private static final String SQL_UPDATE = "update posts set author_id=?, text=? WHERE id=?";
+    private static final String SQL_SAVE = "insert into posts(author_id, text,creation_date, id) values(?, ?, ?, uuid_generate_v1())";
+    private static final String SQL_UPDATE = "update posts set author_id=?, text=?, creation_date=? WHERE id=?";
     private static final String SQL_DELETE = "delete from posts where id = ?";
 
     @Override
@@ -34,6 +31,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                     .id(resultSet.getObject("id", UUID.class))
                     .authorId(resultSet.getObject("author_id", UUID.class))
                     .text(resultSet.getString("text"))
+                    .creationDate(resultSet.getTimestamp("creation_date").toInstant())
                     .build();
             return Optional.of(post);
         } catch (SQLException throwable) {
@@ -53,6 +51,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                         .id(resultSet.getObject("id", UUID.class))
                         .authorId(resultSet.getObject("author_id", UUID.class))
                         .text(resultSet.getString("text"))
+                        .creationDate(resultSet.getTimestamp("creation_date").toInstant())
                         .build();
                 result.add(post);
             }
@@ -72,6 +71,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                 );
                 preparedStatement.setObject(1, item.getAuthorId());
                 preparedStatement.setString(2, item.getText());
+                preparedStatement.setTimestamp(3, Timestamp.from(item.getCreationDate()));
                 preparedStatement.executeUpdate();
                 ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
                 generatedKeys.next();
@@ -81,7 +81,8 @@ public class PostsRepositoryImpl implements PostsRepository {
                 PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE);
                 preparedStatement.setObject(1, item.getAuthorId());
                 preparedStatement.setString(2, item.getText());
-                preparedStatement.setObject(3, item.getId());
+                preparedStatement.setTimestamp(3,Timestamp.from(item.getCreationDate()));
+                preparedStatement.setObject(4, item.getId());
                 preparedStatement.executeUpdate();
                 return item;
             }

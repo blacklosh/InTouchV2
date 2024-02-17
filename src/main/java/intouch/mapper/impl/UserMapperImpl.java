@@ -34,7 +34,6 @@ public class UserMapperImpl implements UserMapper {
     @Override
     public User toUser(SignUpForm dto) {
         return User.builder()
-                .id(UUID.randomUUID())
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .passwordHash(passwordEncoder.encode(dto.getPassword()))

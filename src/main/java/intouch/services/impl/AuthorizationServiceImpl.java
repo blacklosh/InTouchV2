@@ -35,15 +35,15 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public UserDto signIn(SignInForm form) throws InTouchException {
-        if(form.getEmail() == null) {
+        if (form.getEmail() == null) {
             throw new InTouchException("Email cannot be null");
         }
         Optional<User> optionalUser = usersRepository.findByEmail(form.getEmail());
-        if(optionalUser.isEmpty()) {
+        if (optionalUser.isEmpty()) {
             throw new InTouchException("User with email " + form.getEmail() + " not found.");
         }
         User user = optionalUser.get();
-        if(!passwordEncoder.matches(form.getPassword(), user.getPasswordHash())) {
+        if (!passwordEncoder.matches(form.getPassword(), user.getPasswordHash())) {
             throw new InTouchException("Wrong password");
         }
         return userMapper.toDto(user);

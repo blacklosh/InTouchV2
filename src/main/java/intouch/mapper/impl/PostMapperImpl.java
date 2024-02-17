@@ -5,6 +5,7 @@ import intouch.dto.PostDto;
 import intouch.mapper.PostMapper;
 import intouch.model.Post;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ public class PostMapperImpl implements PostMapper {
                 .id(post.getId())
                 .authorId(post.getAuthorId())
                 .text(post.getText())
+                .creationDate(post.getCreationDate())
                 .build();
     }
 
@@ -24,6 +26,7 @@ public class PostMapperImpl implements PostMapper {
                 .id(dto.getId())
                 .authorId(dto.getAuthorId())
                 .text(dto.getText())
+                .creationDate(dto.getCreationDate())
                 .build();
     }
 
@@ -32,6 +35,7 @@ public class PostMapperImpl implements PostMapper {
         return Post.builder()
                 .authorId(dto.getAuthorId())
                 .text(dto.getText())
+                .creationDate(Instant.now())
                 .build();
     }
 
