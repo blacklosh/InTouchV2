@@ -33,7 +33,6 @@ public class PostsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("utf-8");
         Session session = sessionsManager.getSession(false, req, resp);
         if (session != null && session.getAttribute("user") != null) {
             UserDto user = (UserDto) session.getAttribute("user");
@@ -48,6 +47,7 @@ public class PostsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
         String text = req.getParameter("text");
         Session session = sessionsManager.getSession(false, req, resp);

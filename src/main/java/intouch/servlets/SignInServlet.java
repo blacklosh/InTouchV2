@@ -30,7 +30,6 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("utf-8");
         Session session = sessionsManager.getSession(false, req, resp);
         if (session != null && session.getAttribute("user") != null) {
             resp.sendRedirect("menu");
@@ -42,7 +41,6 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("utf-8");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         SignInForm signInForm = SignInForm.builder()

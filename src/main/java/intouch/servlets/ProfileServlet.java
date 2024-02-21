@@ -25,7 +25,6 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("utf-8");
         Session session = sessionsManager.getSession(false, req, resp);
         if (session != null && session.getAttribute("user") != null) {
             UserDto user = (UserDto) session.getAttribute("user");
@@ -35,5 +34,4 @@ public class ProfileServlet extends HttpServlet {
             resp.sendRedirect("signin");
         }
     }
-
 }
