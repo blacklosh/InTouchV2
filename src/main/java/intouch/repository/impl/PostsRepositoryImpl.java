@@ -12,8 +12,8 @@ import java.util.*;
 public class PostsRepositoryImpl implements PostsRepository {
     private final Connection connection;
 
-    private static final String SQL_SELECT_BY_ID = "select * from posts where id = ?";
-    private static final String SQL_SELECT_ALL = "select * from posts";
+    private static final String SQL_SELECT_BY_ID = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.password_hash from posts p left join user_accounts u on p.author_id = u.id where p.id = ?";
+    private static final String SQL_SELECT_ALL = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.password_hash from posts p left join user_accounts u on p.author_id = u.id;";
     private static final String SQL_SAVE = "insert into posts(author_id, text,creation_date, id) values(?, ?, ?, uuid_generate_v1())";
     private static final String SQL_UPDATE = "update posts set author_id=?, text=?, creation_date=? WHERE id=?";
     private static final String SQL_DELETE = "delete from posts where id = ?";
@@ -28,8 +28,13 @@ public class PostsRepositoryImpl implements PostsRepository {
                 return Optional.empty();
             }
             Post post = Post.builder()
-                    .id(resultSet.getObject("id", UUID.class))
-                    .authorId(resultSet.getObject("author_id", UUID.class))
+                    .id(resultSet.getObject("post_id", UUID.class))
+                    .author(User.builder()
+                            .id(resultSet.getObject("user_id",UUID.class))
+                            .name(resultSet.getString("name"))
+                            .email(resultSet.getString("email"))
+                            .passwordHash(resultSet.getString("password_hash"))
+                            .build())
                     .text(resultSet.getString("text"))
                     .creationDate(resultSet.getTimestamp("creation_date").toInstant())
                     .build();
@@ -46,10 +51,16 @@ public class PostsRepositoryImpl implements PostsRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()) {
                 Post post = Post.builder()
-                        .id(resultSet.getObject("id", UUID.class))
-                        .authorId(resultSet.getObject("author_id", UUID.class))
+                        .id(resultSet.getObject("post_id", UUID.class))
+                        .author(User.builder()
+                                .id(resultSet.getObject("user_id",UUID.class))
+                                .name(resultSet.getString("name"))
+                                .email(resultSet.getString("email"))
+                                .passwordHash(resultSet.getString("password_hash"))
+                                .build())
                         .text(resultSet.getString("text"))
                         .creationDate(resultSet.getTimestamp("creation_date").toInstant())
                         .build();
@@ -69,7 +80,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                         SQL_SAVE,
                         new String[]{"id"}
                 );
-                preparedStatement.setObject(1, item.getAuthorId());
+                preparedStatement.setObject(1, item.getAuthor().getId());
                 preparedStatement.setString(2, item.getText());
                 preparedStatement.setTimestamp(3, Timestamp.from(item.getCreationDate()));
                 preparedStatement.executeUpdate();
@@ -79,7 +90,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                 return item;
             } else {
                 PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE);
-                preparedStatement.setObject(1, item.getAuthorId());
+                preparedStatement.setObject(1, item.getAuthor().getId());
                 preparedStatement.setString(2, item.getText());
                 preparedStatement.setTimestamp(3,Timestamp.from(item.getCreationDate()));
                 preparedStatement.setObject(4, item.getId());

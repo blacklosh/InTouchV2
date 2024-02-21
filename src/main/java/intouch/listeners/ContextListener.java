@@ -58,7 +58,7 @@ public class ContextListener implements ServletContextListener {
         UsersService usersService = new UsersServiceImpl(usersRepository);
         AuthorizationService authorizationService = new AuthorizationServiceImpl(usersRepository, userMapper, passwordEncoder);
         PostsRepository postsRepository = new PostsRepositoryImpl(connection);
-        PostMapper postMapper = new PostMapperImpl();
+        PostMapper postMapper = new PostMapperImpl(userMapper);
         PostsService postsService = new PostsServiceImpl(postsRepository, postMapper);
 
         context.setAttribute("sessionsManager", sessionsManager);

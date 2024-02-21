@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PostDto {
     private UUID id;
-    private UUID authorId;
+    private UserDto author;
     private String text;
     private Instant creationDate;
 }
