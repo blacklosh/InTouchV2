@@ -24,7 +24,8 @@
             <input type="submit" value="Отправить"/>
     </form>
     <#list posts as post>
-        <p>${post.author.name} ${post.text} ${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</p>
+        <b>${post.author.name} ${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</b>
+        <p>${post.text}</p>
     </#list>
 </div>
 </body>

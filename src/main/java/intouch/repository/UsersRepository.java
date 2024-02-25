@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface UsersRepository extends CrudRepository<User, UUID> {
     Optional<User> findByEmail(String email);
+    void updateAvatarForUser(UUID userId, UUID avatarId);
 }

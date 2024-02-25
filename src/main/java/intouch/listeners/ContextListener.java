@@ -4,14 +4,13 @@ import intouch.mapper.PostMapper;
 import intouch.mapper.UserMapper;
 import intouch.mapper.impl.PostMapperImpl;
 import intouch.mapper.impl.UserMapperImpl;
+import intouch.repository.FileRepository;
 import intouch.repository.PostsRepository;
 import intouch.repository.UsersRepository;
+import intouch.repository.impl.FileRepositoryImpl;
 import intouch.repository.impl.PostsRepositoryImpl;
 import intouch.repository.impl.UsersRepositoryImpl;
-import intouch.services.AuthorizationService;
-import intouch.services.PasswordEncoder;
-import intouch.services.PostsService;
-import intouch.services.UsersService;
+import intouch.services.*;
 import intouch.services.impl.*;
 import intouch.util.PropertyReader;
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +49,7 @@ public class ContextListener implements ServletContextListener {
         } catch (SQLException e) {
             System.err.println("CONNECTION NOT CREATED: " + e.getLocalizedMessage());
         }
-
-        SessionsManager sessionsManager = new SessionsManager();
+        
         UsersRepository usersRepository = new UsersRepositoryImpl(connection);
         PasswordEncoder passwordEncoder = new PasswordEncoderImpl();
         UserMapper userMapper = new UserMapperImpl(passwordEncoder);
@@ -60,8 +58,10 @@ public class ContextListener implements ServletContextListener {
         PostsRepository postsRepository = new PostsRepositoryImpl(connection);
         PostMapper postMapper = new PostMapperImpl(userMapper);
         PostsService postsService = new PostsServiceImpl(postsRepository, postMapper);
+        FileRepository fileRepository = new FileRepositoryImpl(connection);
+        FileService fileService = new FileServiceImpl("/Users/artur/Documents/uploads", fileRepository, usersRepository);
 
-        context.setAttribute("sessionsManager", sessionsManager);
+        context.setAttribute("fileService", fileService);
         context.setAttribute("authorizationService", authorizationService);
         context.setAttribute("usersService", usersService);
         context.setAttribute("postsService", postsService);

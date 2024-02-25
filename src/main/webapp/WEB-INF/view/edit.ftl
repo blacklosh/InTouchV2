@@ -19,6 +19,11 @@
     <p>Hey, Misha</p>
 
     <p>Letter, Misha</p>
+
+    <form action="upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit">
+    </form>
 </div>
 </body>
 </html>

@@ -9,10 +9,10 @@ import java.util.UUID;
 @Data
 @Builder
 @AllArgsConstructor
-public class User {
+public class FileInfo {
     private UUID id;
-    private String name;
-    private String email;
-    private String passwordHash;
-    private UUID avatarId;
+    private String originalFileName;
+    private String storageFileName;
+    private Long size;
+    private String type;
 }

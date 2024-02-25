@@ -1,13 +1,11 @@
 package intouch.mapper.impl;
 
-import lombok.RequiredArgsConstructor;
 import intouch.dto.SignUpForm;
 import intouch.dto.UserDto;
 import intouch.mapper.UserMapper;
 import intouch.model.User;
 import intouch.services.PasswordEncoder;
-
-import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class UserMapperImpl implements UserMapper {
@@ -19,6 +17,7 @@ public class UserMapperImpl implements UserMapper {
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
+                .avatarId(user.getAvatarId())
                 .build();
     }
 
@@ -28,6 +27,7 @@ public class UserMapperImpl implements UserMapper {
                 .id(dto.getId())
                 .email(dto.getEmail())
                 .name(dto.getName())
+                .avatarId(dto.getAvatarId())
                 .build();
     }
 

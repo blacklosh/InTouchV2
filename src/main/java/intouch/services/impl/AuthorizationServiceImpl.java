@@ -1,6 +1,5 @@
 package intouch.services.impl;
 
-import lombok.RequiredArgsConstructor;
 import intouch.dto.SignInForm;
 import intouch.dto.SignUpForm;
 import intouch.dto.UserDto;
@@ -10,6 +9,7 @@ import intouch.model.User;
 import intouch.repository.UsersRepository;
 import intouch.services.AuthorizationService;
 import intouch.services.PasswordEncoder;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 

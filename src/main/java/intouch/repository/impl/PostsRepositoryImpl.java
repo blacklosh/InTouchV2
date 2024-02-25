@@ -6,7 +6,10 @@ import intouch.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class PostsRepositoryImpl implements PostsRepository {

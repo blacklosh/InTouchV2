@@ -1,10 +1,13 @@
 package intouch.repository.impl;
 
-import lombok.RequiredArgsConstructor;
 import intouch.model.User;
 import intouch.repository.UsersRepository;
+import lombok.RequiredArgsConstructor;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,9 +18,22 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     private static final String SQL_SELECT_BY_EMAIL = "select * from user_accounts where email = ?";
     private static final String SQL_SELECT_BY_ID = "select * from user_accounts where id = ?";
-    private static final String SQL_REGISTER = "insert into user_accounts(name, email, password_hash, id) values(?, ?, ?, uuid_generate_v1())";
-    private static final String SQL_UPDATE = "update user_accounts set name=?, email=?, password_hash=? where id=?";
+    private static final String SQL_REGISTER = "insert into user_accounts(name, email, password_hash, avatar_id, id) values(?, ?, ?, ?, uuid_generate_v1())";
+    private static final String SQL_UPDATE = "update user_accounts set name=?, email=?, password_hash=?, avatar_id=? where id=?";
     private static final String SQL_DELETED = "delete from user_accounts where id = ?";
+    private static final String SQL_UPDATE_AVATAR = "update user_accounts set avatar_id=? where id=?";
+
+    @Override
+    public void updateAvatarForUser(UUID userId, UUID avatarId) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_AVATAR);
+            preparedStatement.setObject(1, avatarId);
+            preparedStatement.setObject(2, userId);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public Optional<User> findByEmail(String email) {
@@ -33,6 +49,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                     .name(resultSet.getString("name"))
                     .email(resultSet.getString("email"))
                     .passwordHash(resultSet.getString("password_hash"))
+                    .avatarId(resultSet.getObject("id",UUID.class))
                     .build();
             return Optional.of(user);
         } catch (SQLException throwable) {
@@ -63,6 +80,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                 preparedStatement.setString(2, item.getEmail());
                 preparedStatement.setString(3, item.getPasswordHash());
                 preparedStatement.setObject(4, item.getId());
+                preparedStatement.setObject(5,item.getAvatarId());
                 preparedStatement.executeUpdate();
                 return item;
             }
@@ -97,6 +115,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                     .name(resultSet.getString("name"))
                     .email(resultSet.getString("email"))
                     .passwordHash(resultSet.getString("password_hash"))
+                    .avatarId(resultSet.getObject("id", UUID.class))
                     .build();
             return Optional.of(user);
         } catch (SQLException throwable) {

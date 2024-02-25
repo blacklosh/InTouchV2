@@ -2,7 +2,6 @@ package intouch.mapper.impl;
 
 import intouch.dto.CreatePostForm;
 import intouch.dto.PostDto;
-import intouch.dto.UserDto;
 import intouch.mapper.PostMapper;
 import intouch.mapper.UserMapper;
 import intouch.model.Post;

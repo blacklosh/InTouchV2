@@ -1,8 +1,9 @@
 package intouch.util;
 
 import javax.servlet.ServletContext;
-import java.io.*;
-import java.net.URI;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 
 public class PropertyReader {
