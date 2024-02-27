@@ -8,20 +8,18 @@
 </head>
 <body>
 
-<div class="sidenav">
-    <a href="menu">Главная</a>
-    <a href="edit">Редактировать</a>
-    <a href="logout">Выход</a>
-    <a href="delete">Удалить профиль</a>
-</div>
+<#include "menu.ftl">
+
 <div class="content">
     <#if user.avatarId??>
-        <img src="download/${user.avatarId}" width="400" height="250">
+        <img src="download/${user.avatarId}" class="avatar">
     <#else>
-        <img src="resources/kkkkk.jpg" width="400" height="250">
+        <img src="resources/avatar.png" class="avatar">
     </#if>
     <p>${user.name}</p>
     <p>${user.email}</p>
+
+    <a href="edit">Редактировать</a>
 </div>
 </body>
 </html>

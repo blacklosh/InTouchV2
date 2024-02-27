@@ -27,13 +27,8 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        if (session != null && session.getAttribute("user") != null) {
-            resp.sendRedirect("menu");
-        } else {
-            req.setAttribute("err",req.getParameter("err"));
-            req.getRequestDispatcher("signup.ftl").forward(req, resp);
-        }
+        req.setAttribute("err", req.getParameter("err"));
+        req.getRequestDispatcher("signup.ftl").forward(req, resp);
     }
 
     @Override
@@ -50,7 +45,7 @@ public class SignUpServlet extends HttpServlet {
             UserDto userDto = authorizationService.signUp(signUpForm);
             HttpSession session = req.getSession(true);
             session.setAttribute("user", userDto);
-            resp.sendRedirect("menu");
+            resp.sendRedirect("profile");
         } catch (InTouchException e) {
             resp.sendRedirect("signup?err=" + e.getMessage());
         }

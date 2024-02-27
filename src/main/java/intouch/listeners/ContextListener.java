@@ -59,7 +59,7 @@ public class ContextListener implements ServletContextListener {
         PostMapper postMapper = new PostMapperImpl(userMapper);
         PostsService postsService = new PostsServiceImpl(postsRepository, postMapper);
         FileRepository fileRepository = new FileRepositoryImpl(connection);
-        FileService fileService = new FileServiceImpl("/Users/artur/Documents/uploads", fileRepository, usersRepository);
+        FileService fileService = new FileServiceImpl("/Users/artur/Documents/uploads/", fileRepository, usersRepository);
 
         context.setAttribute("fileService", fileService);
         context.setAttribute("authorizationService", authorizationService);
@@ -70,6 +70,5 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
     }
 }

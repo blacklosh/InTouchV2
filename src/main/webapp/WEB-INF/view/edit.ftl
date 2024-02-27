@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="resources/css/edit.css">
 </head>
 <body>
-<div class="sidenav">
-    <a href="profile">Профиль</a>
-    <a href="menu">Главная</a>
-    <a href="personal_data">Личные данные</a>
-</div>
+
+<#include "menu.ftl">
+
 <div class="content">
     <h2>Информация</h2>
     Ваш пол: <input type="radio" name="man"> Мужской </br><input type="radio" name="man"> Женский

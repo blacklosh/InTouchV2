@@ -29,33 +29,23 @@ public class PostsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (session != null && session.getAttribute("user") != null) {
-            UserDto user = (UserDto) session.getAttribute("user");
-            List<PostDto> posts = postsService.findAll();
-            req.setAttribute("user", user);
-            req.setAttribute("posts", posts);
-            req.getRequestDispatcher("posts.ftl").forward(req,resp);
-        } else {
-            resp.sendRedirect("signin");
-        }
+        UserDto user = (UserDto) session.getAttribute("user");
+        List<PostDto> posts = postsService.findAll();
+        req.setAttribute("user", user);
+        req.setAttribute("posts", posts);
+        req.getRequestDispatcher("posts.ftl").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("utf-8");
-        resp.setCharacterEncoding("utf-8");
         String text = req.getParameter("text");
         HttpSession session = req.getSession();
-        if (session != null && session.getAttribute("user") != null) {
-            UserDto user = (UserDto) session.getAttribute("user");
-            CreatePostForm form = CreatePostForm.builder()
-                    .text(text)
-                    .authorId(user.getId())
-                    .build();
-            postsService.save(form);
-            resp.sendRedirect("posts");
-        } else {
-            resp.sendRedirect("signin");
-        }
+        UserDto user = (UserDto) session.getAttribute("user");
+        CreatePostForm form = CreatePostForm.builder()
+                .text(text)
+                .authorId(user.getId())
+                .build();
+        postsService.save(form);
+        resp.sendRedirect("posts");
     }
 }

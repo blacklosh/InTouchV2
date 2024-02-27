@@ -15,8 +15,8 @@ import java.util.UUID;
 public class PostsRepositoryImpl implements PostsRepository {
     private final Connection connection;
 
-    private static final String SQL_SELECT_BY_ID = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.password_hash from posts p left join user_accounts u on p.author_id = u.id where p.id = ?";
-    private static final String SQL_SELECT_ALL = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.password_hash from posts p left join user_accounts u on p.author_id = u.id;";
+    private static final String SQL_SELECT_BY_ID = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.avatar_id, u.password_hash from posts p left join user_accounts u on p.author_id = u.id where p.id = ?";
+    private static final String SQL_SELECT_ALL = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.avatar_id, u.password_hash from posts p left join user_accounts u on p.author_id = u.id;";
     private static final String SQL_SAVE = "insert into posts(author_id, text,creation_date, id) values(?, ?, ?, uuid_generate_v1())";
     private static final String SQL_UPDATE = "update posts set author_id=?, text=?, creation_date=? WHERE id=?";
     private static final String SQL_DELETE = "delete from posts where id = ?";
@@ -36,6 +36,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                             .id(resultSet.getObject("user_id",UUID.class))
                             .name(resultSet.getString("name"))
                             .email(resultSet.getString("email"))
+                            .avatarId((UUID) resultSet.getObject("avatar_id"))
                             .passwordHash(resultSet.getString("password_hash"))
                             .build())
                     .text(resultSet.getString("text"))
@@ -62,6 +63,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                                 .id(resultSet.getObject("user_id",UUID.class))
                                 .name(resultSet.getString("name"))
                                 .email(resultSet.getString("email"))
+                                .avatarId((UUID) resultSet.getObject("avatar_id"))
                                 .passwordHash(resultSet.getString("password_hash"))
                                 .build())
                         .text(resultSet.getString("text"))

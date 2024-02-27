@@ -16,11 +16,6 @@ import java.io.IOException;
 public class EditServlet extends HttpServlet {
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        ServletContext context = config.getServletContext();
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UserDto user = (UserDto) session.getAttribute("user");

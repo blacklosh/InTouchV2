@@ -49,7 +49,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                     .name(resultSet.getString("name"))
                     .email(resultSet.getString("email"))
                     .passwordHash(resultSet.getString("password_hash"))
-                    .avatarId(resultSet.getObject("id",UUID.class))
+                    .avatarId(resultSet.getObject("avatar_id",UUID.class))
                     .build();
             return Optional.of(user);
         } catch (SQLException throwable) {
@@ -80,7 +80,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                 preparedStatement.setString(2, item.getEmail());
                 preparedStatement.setString(3, item.getPasswordHash());
                 preparedStatement.setObject(4, item.getId());
-                preparedStatement.setObject(5,item.getAvatarId());
+                preparedStatement.setObject(5, item.getAvatarId());
                 preparedStatement.executeUpdate();
                 return item;
             }
@@ -115,7 +115,7 @@ public class UsersRepositoryImpl implements UsersRepository {
                     .name(resultSet.getString("name"))
                     .email(resultSet.getString("email"))
                     .passwordHash(resultSet.getString("password_hash"))
-                    .avatarId(resultSet.getObject("id", UUID.class))
+                    .avatarId(resultSet.getObject("avatar_id", UUID.class))
                     .build();
             return Optional.of(user);
         } catch (SQLException throwable) {
