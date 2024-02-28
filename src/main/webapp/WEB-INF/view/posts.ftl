@@ -23,22 +23,21 @@
     </div>
     <#list posts as post>
         <div class="post">
-            <div class="userInfo">
+            <div class="userI2nfo">
                 <div class="avatar">
                     <#if post.author.avatarId??>
                         <img src="download/${post.author.avatarId}" class="avatar_small">
                     <#else>
                         <img src="resources/avatar.png" class="avatar_small">
                     </#if>
-                    <div class="info">
-                        <p>${post.author.name}<p/>
-                        <p>${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</p>
+                    <div class="text">
+                        <p>${post.text}</p>
                     </div>
                 </div>
-
             </div>
-            <div class="text">
-                <p>${post.text}</p>
+            <div class="info">
+                <p class="name">${post.author.name}<p/>
+                <p class="date">${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</p>
             </div>
         </div>
     </#list>

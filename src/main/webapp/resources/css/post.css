@@ -12,36 +12,41 @@ h1 {
     height:150px;
 }
 
- .news {
+ .post {
      display: flex;
-     resize: vertical;
-     flex-direction: column;
+     flex-direction: row;
      text-align: left;
-     padding: 12px;
+     padding: 30px;
  }
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    object-fit: cover;
+    position: relative;
+    margin-right: 15px;
+}
 
  .userInfo {
      display: flex;
-     flex-direction: row;
+     align-self: start;
      width: 100px;
      height: 50px;
  }
 
  .info {
-     display: flex;
-     flex-direction: column;
+     flex: 1 1 auto;
+     width: 60px;
+     white-space: nowrap;
+     margin-right: 10px;
  }
-
- .avatar{
-     display: flex;
-     flex-direction: row;
-     
-
+ .name {
+     display: inline-flex;
+     max-width: 100%;
  }
-
-.avatar_small {
-    width: 40px;
-    height: 40px;
-    border-radius: 15px;
-    object-fit: cover;
-}
+ .date {
+     display: flex;
+     text-overflow: ellipsis;
+     overflow: hidden;
+ }

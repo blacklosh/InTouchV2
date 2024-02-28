@@ -26,5 +26,6 @@ create table if not exists posts
     id uuid constraint posts_pk primary key,
     author_id uuid constraint posts_user_accounts_id_fk
             references user_accounts,
-    text varchar(500) not null
+    text varchar(500) not null,
+    creation_date timestamp
 );

@@ -20,6 +20,7 @@
     <p>${user.email}</p>
 
     <a href="edit">Редактировать</a>
+    <a href="logout">Выход</a>
 </div>
 </body>
 </html>
