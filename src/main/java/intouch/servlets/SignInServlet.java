@@ -44,9 +44,9 @@ public class SignInServlet extends HttpServlet {
             UserDto userDto = authorizationService.signIn(signInForm);
             HttpSession session = req.getSession(true);
             session.setAttribute("user", userDto);
-            resp.sendRedirect("profile");
+            resp.sendRedirect(req.getContextPath() + "/profile");
         } catch (InTouchException e) {
-            resp.sendRedirect("signin?err=" + e.getMessage());
+            resp.sendRedirect(req.getContextPath() + "/signin?err=" + e.getMessage());
         }
     }
 }

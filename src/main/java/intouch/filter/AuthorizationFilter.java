@@ -41,10 +41,10 @@ public class AuthorizationFilter extends HttpFilter {
         } else if (isAuthenticated && isRequestOnAuthPage) {
             // пользователь аутенцифицирован и запрашивает страницу входа
             // - отдаем ему профиль
-            response.sendRedirect("profile");
+            response.sendRedirect(request.getContextPath() + "/profile");
         } else {
             // если пользователь не аутенцицицирован и запрашивает другие страницы
-            response.sendRedirect("signin");
+            response.sendRedirect(request.getContextPath() + "/signin");
         }
     }
 }

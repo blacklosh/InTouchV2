@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Новости</title>
-    <link href="resources/css/style_main.css" rel="stylesheet">
-    <link href="resources/css/post.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/style_main.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/post.css" rel="stylesheet">
 </head>
 <body>
 
@@ -24,15 +24,15 @@
     <#list posts as post>
         <div class="post">
             <div class="userI2nfo">
-                <div class="avatar">
+                <div>
                     <#if post.author.avatarId??>
-                        <img src="download/${post.author.avatarId}" class="avatar_small">
+                        <img src="${contextPath}/download/${post.author.avatarId}" class="avatar_small">
                     <#else>
-                        <img src="resources/avatar.png" class="avatar_small">
+                        <img src="${contextPath}/resources/avatar.png" class="avatar_small">
                     </#if>
-                    <div class="text">
-                        <p>${post.text}</p>
-                    </div>
+                    <a class="text" href="${contextPath}/post/${post.id}">
+                        ${post.text}
+                    </a>
                 </div>
             </div>
             <div class="info">

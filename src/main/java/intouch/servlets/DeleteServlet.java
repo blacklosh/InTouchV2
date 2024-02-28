@@ -27,12 +27,12 @@ public class DeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("signin");
+            resp.sendRedirect(req.getContextPath() + "/signin");
             return;
         }
         UserDto userDto = (UserDto) session.getAttribute("user");
         usersService.delete(userDto.getId());
         session.removeAttribute("user");
-        resp.sendRedirect("signin");
+        resp.sendRedirect(req.getContextPath() + "/signin");
     }
 }

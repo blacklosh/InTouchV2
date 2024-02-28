@@ -46,6 +46,6 @@ public class PostsServlet extends HttpServlet {
                 .authorId(user.getId())
                 .build();
         postsService.save(form);
-        resp.sendRedirect("posts");
+        resp.sendRedirect(req.getContextPath() + "/posts");
     }
 }

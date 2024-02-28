@@ -1,7 +1,5 @@
 package intouch.servlets;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +16,6 @@ public class LogoutServlet extends HttpServlet {
         if(session != null) {
             session.removeAttribute("user");
         }
-        resp.sendRedirect("signin");
+        resp.sendRedirect(req.getContextPath() + "/signin");
     }
 }

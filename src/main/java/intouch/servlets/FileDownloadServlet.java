@@ -26,7 +26,7 @@ public class FileDownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UUID fileId;
         try {
-            String fileIdString = request.getRequestURI().substring("/intouch/download/".length());
+            String fileIdString = request.getRequestURI().substring((request.getContextPath() + "/download/").length());
             fileId = UUID.fromString(fileIdString);
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             response.setStatus(400);

@@ -1,6 +1,6 @@
 <div class="sidenav">
-    <a href="profile">Профиль</a>
-    <a href="posts">Новости</a>
-    <a href="#services">Друзья</a>
-    <a href="message">Сообщения</a>
+    <a href="${contextPath}/profile">Профиль</a>
+    <a href="${contextPath}/posts">Новости</a>
+    <a href="${contextPath}/friends">Друзья</a>
+    <a href="${contextPath}/message">Сообщения</a>
 </div>

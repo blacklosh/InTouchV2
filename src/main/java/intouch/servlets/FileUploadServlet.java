@@ -34,6 +34,6 @@ public class FileUploadServlet extends HttpServlet {
                 part.getSize());
         userDto.setAvatarId(fileInfo.getId());
         session.setAttribute("user", userDto);
-        response.sendRedirect("profile");
+        response.sendRedirect(request.getContextPath() + "/profile");
     }
 }

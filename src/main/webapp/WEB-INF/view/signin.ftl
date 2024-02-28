@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Вход</title>
-    <link rel="stylesheet" href="resources/css/sign-in.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/sign-in.css">
 </head>
 <body>
 <div style="color: red">${err!''}</div>
 <div class="container">
 
-    <form class="form-center-content" method="post" action="signin">
+    <form class="form-center-content" method="post" action="${contextPath}/signin">
         <fieldset>
             <legend>Вход</legend>
             <label>
@@ -23,7 +23,7 @@
             </#if>
             <input class="login-button" type="submit">
         </fieldset>
-        <a href="signup.ftl">Регистрация</a>
+        <a href="${contextPath}/signup">Регистрация</a>
     </form>
 </div>
 </body>
