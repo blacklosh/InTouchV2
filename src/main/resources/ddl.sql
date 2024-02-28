@@ -16,7 +16,7 @@ create table if not exists user_accounts
             primary key,
     name     varchar(30),
     email    varchar(30),
-    password_hash varchar(30)
+    password_hash varchar(30),
     avatar_id     uuid
         references file_info
 );
