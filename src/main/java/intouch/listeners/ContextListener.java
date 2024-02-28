@@ -59,7 +59,8 @@ public class ContextListener implements ServletContextListener {
         PostMapper postMapper = new PostMapperImpl(userMapper);
         PostsService postsService = new PostsServiceImpl(postsRepository, postMapper);
         FileRepository fileRepository = new FileRepositoryImpl(connection);
-        FileService fileService = new FileServiceImpl("/Users/artur/Documents/uploads/", fileRepository, usersRepository);
+        String fileDownloadUrl = PropertyReader.getProperty("FILE_DOWNLOAD_URL", context);
+        FileService fileService = new FileServiceImpl(fileDownloadUrl, fileRepository, usersRepository);
 
         context.setAttribute("fileService", fileService);
         context.setAttribute("authorizationService", authorizationService);
