@@ -6,18 +6,20 @@
     <title>Профиль</title>
     <link href="${contextPath}/resources/css/style_main.css" rel="stylesheet">
 </head>
-    <body>
+<body>
+<div class="content0">
     <#include "menu.ftl">
-        <div class="content">
-            <#if user.avatarId??>
-                <img src="${contextPath}/download/${user.avatarId}" class="avatar">
-            <#else>
-                <img src="${contextPath}/resources/avatar.png" class="avatar">
-            </#if>
-            <p>${user.name}</p>
-            <p>${user.email}</p>
-            <a href="${contextPath}/edit">Редактировать</a>
-            <a href="${contextPath}/logout">Выход</a>
-        </div>
-    </body>
+    <div class="content1">
+        <#if user.avatarId??>
+            <img src="${contextPath}/download/${user.avatarId}" class="avatar">
+        <#else>
+            <img src="${contextPath}/resources/avatar.png" class="avatar">
+        </#if>
+        <p class="text">${user.name}</p>
+        <p class="text">${user.email}</p>
+        <a class="link" href="${contextPath}/edit">Редактировать</a>
+        <a class="link" href="${contextPath}/logout">Выход</a>
+    </div>
+</div>
+</body>
 </html>

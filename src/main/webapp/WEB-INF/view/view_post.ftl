@@ -12,21 +12,19 @@
 
 <div class="content">
     <div class="post">
-        <div class="userI2nfo">
-            <div class="avatar">
-                <#if post.author.avatarId??>
-                    <img src="${contextPath}/download/${post.author.avatarId}" class="avatar_small">
-                <#else>
-                    <img src="${contextPath}/resources/avatar.png" class="avatar_small">
-                </#if>
-                <div class="text">
-                    <p>${post.text}</p>
-                </div>
+        <div class="userInfo">
+            <#if post.author.avatarId??>
+                <img src="${contextPath}/download/${post.author.avatarId}" class="avatar_small">
+            <#else>
+                <img src="${contextPath}/resources/avatar.png" class="avatar_small">
+            </#if>
+            <div class="info">
+                <p class="name">${post.author.name}<p/>
+                <p class="date">${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</p>
             </div>
         </div>
-        <div class="info">
-            <p class="name">${post.author.name}<p/>
-            <p class="date">${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</p>
+        <div class="text">
+            <p>${post.text}</p>
         </div>
     </div>
 </div>
