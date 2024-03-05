@@ -39,4 +39,9 @@ public class PostsServiceImpl implements PostsService {
     public List<PostDto> findAll() {
         return postMapper.toDtoList(postsRepository.findAll());
     }
+
+    @Override
+    public List<PostDto> findAllByAuthorId(UUID id) {
+        return postMapper.toDtoList(postsRepository.findAllByAuthorId(id));
+    }
 }

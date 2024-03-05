@@ -11,4 +11,5 @@ public interface PostsService {
     PostDto save(CreatePostForm form);
     PostDto getById(UUID id) throws NotFoundException;
     List<PostDto> findAll();
+    List<PostDto> findAllByAuthorId(UUID id);
 }

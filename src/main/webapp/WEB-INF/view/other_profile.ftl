@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="author" type="intouch.dto.UserDto" -->
 <#-- @ftlvariable name="user" type="intouch.dto.UserDto" -->
 <#-- @ftlvariable name="posts" type="java.util.List<intouch.dto.PostDto>" -->
 <#-- @ftlvariable name="contextPath" type="java.lang.String" -->
@@ -6,24 +7,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Новости</title>
+    <title>${author.name}</title>
     <link href="${contextPath}/resources/css/style_main.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/post.css" rel="stylesheet">
 </head>
 <body>
-
-<#include "menu.ftl">
-
 <div class="content0">
+    <#include "menu.ftl">
     <div class="content1">
-        <div class="message">
-            <form method="post">
-                <label>
-                    <textarea type="text" name="text" placeholder="Напишите сообщение..."></textarea>
-                </label>
-                <input type="submit" value="Отправить"/>
-            </form>
-        </div>
+        <#if author.avatarId??>
+            <img src="${contextPath}/download/${author.avatarId}" class="avatar" alt="AVATAR">
+        <#else>
+            <img src="${contextPath}/resources/avatar.png" class="avatar" alt="AVATAR">
+        </#if>
+        <p class="text">${author.name}</p>
+        <p class="text">${author.email}</p>
+
         <#list posts as post>
             <div class="post">
                 <div class="userInfo">

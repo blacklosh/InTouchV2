@@ -53,7 +53,7 @@ public class ContextListener implements ServletContextListener {
         UsersRepository usersRepository = new UsersRepositoryImpl(connection);
         PasswordEncoder passwordEncoder = new PasswordEncoderImpl();
         UserMapper userMapper = new UserMapperImpl(passwordEncoder);
-        UsersService usersService = new UsersServiceImpl(usersRepository);
+        UsersService usersService = new UsersServiceImpl(usersRepository, userMapper);
         AuthorizationService authorizationService = new AuthorizationServiceImpl(usersRepository, userMapper, passwordEncoder);
         PostsRepository postsRepository = new PostsRepositoryImpl(connection);
         PostMapper postMapper = new PostMapperImpl(userMapper);

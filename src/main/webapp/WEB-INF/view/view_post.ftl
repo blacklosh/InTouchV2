@@ -10,7 +10,7 @@
 
 <#include "menu.ftl">
 
-<div class="content">
+<div class="content1">
     <div class="post">
         <div class="userInfo">
             <#if post.author.avatarId??>
@@ -19,15 +19,12 @@
                 <img src="${contextPath}/resources/avatar.png" class="avatar_small">
             </#if>
             <div class="info">
-                <p class="name">${post.author.name}<p/>
-                <p class="date">${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</p>
+                <div class="name">${post.author.name}</div>
+                <div class="date">${post.creationDate?datetime.iso?string["yyyy-MM-dd HH:mm"]}</div>
             </div>
         </div>
-        <div class="text">
-            <p>${post.text}</p>
-        </div>
+        <a class="post-text" href="${contextPath}/post/${post.id}">${post.text}</a>
     </div>
 </div>
-
 </body>
 </html>

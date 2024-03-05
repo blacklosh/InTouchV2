@@ -17,11 +17,13 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     private static final String SQL_SELECT_BY_ID = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.avatar_id, u.password_hash from posts p left join user_accounts u on p.author_id = u.id where p.id = ?";
     private static final String SQL_SELECT_ALL = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.avatar_id, u.password_hash from posts p left join user_accounts u on p.author_id = u.id order by p.creation_date desc;";
+    private static final String SQL_SELECT_ALL_BY_AUTHOR_ID = "select p.id as post_id, p.text, p.creation_date, u.id as user_id, u.name, u.email, u.avatar_id, u.password_hash from posts p left join user_accounts u on p.author_id = u.id where author_id = ? order by p.creation_date desc;";
     private static final String SQL_SAVE = "insert into posts(author_id, text,creation_date, id) values(?, ?, ?, uuid_generate_v1())";
     private static final String SQL_UPDATE = "update posts set author_id=?, text=?, creation_date=? WHERE id=?";
     private static final String SQL_DELETE = "delete from posts where id = ?";
 
     @Override
+    @SuppressWarnings(value = "Duplicates")
     public Optional<Post> findById(UUID id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_BY_ID);
@@ -50,12 +52,42 @@ public class PostsRepositoryImpl implements PostsRepository {
     }
 
     @Override
+    @SuppressWarnings(value = "Duplicates")
     public List<Post> findAll() {
         List<Post> result = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            while (resultSet.next()) {
+                Post post = Post.builder()
+                        .id(resultSet.getObject("post_id", UUID.class))
+                        .author(User.builder()
+                                .id(resultSet.getObject("user_id",UUID.class))
+                                .name(resultSet.getString("name"))
+                                .email(resultSet.getString("email"))
+                                .avatarId((UUID) resultSet.getObject("avatar_id"))
+                                .passwordHash(resultSet.getString("password_hash"))
+                                .build())
+                        .text(resultSet.getString("text"))
+                        .creationDate(resultSet.getTimestamp("creation_date").toInstant())
+                        .build();
+                result.add(post);
+            }
+        } catch (SQLException throwable) {
+            System.out.println("SQL Exception: " + throwable.getLocalizedMessage());
+        }
+        return result;
+    }
+
+    @Override
+    @SuppressWarnings(value = "Duplicates")
+    public List<Post> findAllByAuthorId(UUID id) {
+        List<Post> result = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_BY_AUTHOR_ID);
+            preparedStatement.setObject(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Post post = Post.builder()
                         .id(resultSet.getObject("post_id", UUID.class))
